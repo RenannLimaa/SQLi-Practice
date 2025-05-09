@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SQLi Demo</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+  <h1>SQLi Demo</h1>
+  <form action="/search" method="post">
+    <input type="text" id="employee_id" name="employee_id" oninput="updateQuery()">
+    <button type="submit">Search</button>
+  </form>
+
+  <h3>Generated Query:</h3>
+  <pre id="query-output">SELECT name FROM employees WHERE id = CAST( AS INT)</pre>
+
+  {% if result %}
+    <h3>Result:</h3>
+    <p>{{ result }}</p>
+  {% endif %}
+
+  {% if query %}
+    <h3>Executed Query:</h3>
+    <pre>{{ query }}</pre>
+  {% endif %}
+</body>
+</html>
